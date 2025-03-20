@@ -1,9 +1,33 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import dropIcon from "../assets/icon.png";
 
+gsap.registerPlugin(ScrollTrigger);
+
 const WhyCarbonCrunch = () => {
+    const containerRef = useRef(null);
+
+    useEffect(() => {
+        gsap.fromTo(
+            containerRef.current,
+            { opacity: 0.1 },
+            {
+                opacity: 1,
+                backgroundColor: "#E3F2FD",
+                borderRadius: '20px',
+                scrollTrigger: {
+                    trigger: containerRef.current,
+                    start: "top bottom",
+                    end: "top top",
+                    scrub: true,
+                },
+            }
+        );
+    }, []);
+
     return (
-        <div className="max-w-7xl mx-auto px-6 xl:py-12 flex flex-col xl:flex-row gap-10">
+        <div ref={containerRef} className="max-w-7xl mx-auto px-6 xl:py-12 flex flex-col xl:flex-row gap-10 transition-colors duration-500">
             <div className="w-full xl:w-1/2 text-center xl:text-left">
                 <h3 className="text-[#239C0C] font-bold text-lg sm:text-xl relative inline-block md:after:block xl:after:content-[''] xl:after:w-16 xl:after:h-1 after:bg-[#239C0C] after:mt-1">
                     Why Carboncrunch

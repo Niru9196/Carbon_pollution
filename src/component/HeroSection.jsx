@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Menu, X } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import bgImage from "../assets/Earth.png"; 
 import heroImage from "../assets/industry.png";
-import "../animation.css";
+// import "../animation.css";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -53,19 +57,41 @@ const Navbar = () => {
 };
 
 const HeroSection = () => {
+    const heroRef = useRef(null);
+
+    useEffect(() => {
+        const element = heroRef.current;
+        gsap.fromTo(
+            element,
+            { opacity: 0, y: 100, scale: 0.8 },
+            {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 1.2,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: element,
+                    start: "top 85%",
+                    toggleActions: "play none none reverse"
+                }
+            }
+        );
+    }, []);
+
     return (
         <div
+            ref={heroRef}
             className="relative w-full h-[60vh] xl:h-screen flex items-center justify-center bg-cover bg-center px-6 md:px-12 fade-in"
             style={{ backgroundImage: `url(${bgImage})` }}
         >
-
             <div className="relative flex w-full max-w-7xl mx-auto flex-col md:flex-row">
-
                 <div className="w-full xl:w-3/5 z-10 flex justify-center items-center flex-col text-center xl:text-left slide-in-left">
                     <h1 className="text-4xl md:text-8xl font-bold tracking-tight">
-                        GHG Accounting <br /> Scope 1, Scope 2, Scope 3
+                        <span className="">GHG Accounting</span> <br />
+                        <span className="">Scope 1, Scope 2, Scope 3</span>
                     </h1>
-                    <p className="text-lg md:text-2xl mt-4 md:mt-8">
+                    <p className="text-lg md:text-2xl mt-4 md:mt-8 font-semibold text-gray-700">
                         Track, minimize, offset, and report your carbon
                         emissions effortlessly to drive faster decarbonization
                         progress.
