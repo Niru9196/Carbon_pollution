@@ -1,0 +1,78 @@
+
+.fade-in {
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.slide-in-left {
+    animation: slideInLeft 1s ease-in-out;
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.slide-in-right {
+    animation: slideInRight 1s ease-in-out;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes dropdownFade {
+    from {
+        opacity: 0;
+        max-height: 0;
+    }
+
+    to {
+        opacity: 1;
+        max-height: 500px;
+    }
+}
+
+@keyframes dropdownFadeOut {
+    from {
+        opacity: 1;
+        max-height: 500px;
+    }
+
+    to {
+        opacity: 0;
+        max-height: 0;
+    }
+}
+
+.nav-dropdown {
+    animation: dropdownFade 0.3s ease-in-out forwards;
+}
+
+.nav-dropdown-hide {
+    animation: dropdownFadeOut 0.3s ease-in-out forwards;
+}
